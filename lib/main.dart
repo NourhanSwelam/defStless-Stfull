@@ -1,7 +1,10 @@
 import 'package:counting/counting.dart';
+import 'package:counting/cubit/bloc_observer.dart';
 import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   runApp( MyApp());
 }
 

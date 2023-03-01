@@ -15,10 +15,10 @@ class counting extends StatelessWidget {
     listener: (context, state) {
       // if(state is IntialCounterstate) 
       // print('initial state');
-       if(state is MinusCounterState) 
-      print('Minus Counter State${state.counter} ');
-       if(state is PlusCounterState) 
-      print('Plus Counter state ${state.counter} ');
+      //  if(state is MinusCounterState) 
+      // print('Minus Counter State${state.counter} ');
+      //  if(state is PlusCounterState) 
+      // print('Plus Counter state ${state.counter} ');
 
       
     } ,
