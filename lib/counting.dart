@@ -1,23 +1,30 @@
+import 'package:counting/cubit/cubit.dart';
+import 'package:counting/cubit/states.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-class counting extends StatefulWidget {
-  const counting({super.key});
-
-  @override
-  State<counting> createState() => _countingState();
-}
-
-class _countingState extends State<counting> {
-  int counter=1;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+import 'package:flutter_bloc/flutter_bloc.dart';
+class counting extends StatelessWidget {
+   
+  
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return BlocProvider(create: (BuildContext context)=>Countercubit(),
+  child:BlocConsumer<Countercubit,CounterStates>(
+    listener: (context, state) {
+      // if(state is IntialCounterstate) 
+      // print('initial state');
+       if(state is MinusCounterState) 
+      print('Minus Counter State${state.counter} ');
+       if(state is PlusCounterState) 
+      print('Plus Counter state ${state.counter} ');
+
+      
+    } ,
+    builder:(context, state) {
+      return Scaffold(
+
       appBar: AppBar(title: Text('Counter',),),
       body:Center(
         child: Row(
@@ -26,23 +33,24 @@ class _countingState extends State<counting> {
           
           children: [
              TextButton(onPressed: (){
-              setState(() {
-                counter++;
-                print(counter);
-              });
+              
+                Countercubit.git(context).plus();
+                print(Countercubit.git(context).counter);
+           
              }, child: Text('Plus')),
              Padding(
                padding: const EdgeInsets.symmetric(horizontal: 20,),
-               child: Text('$counter',style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold),),
+               child: Text('${Countercubit.git(context).counter}',style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold),),
              ),
              
              
               TextButton(onPressed: (){
-              setState(() {
-                counter--;
-                print(counter);
-              });
-             }, child: Text('Minus'))
+                Countercubit.git(context).minus();
+                print(Countercubit.git(context).counter);
+             
+              
+              
+             }, child: Text('Minus')),
 
 
 
@@ -50,5 +58,15 @@ class _countingState extends State<counting> {
         ],),
       )
     );
+    } ,
+ ),
+  
+  
+  
+  
+  );
+    // 
   }
+ 
 }
+
